@@ -1,0 +1,45 @@
+"C:\Program Files\Java\jdk-10.0.2\bin\java" "-javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.3.4\lib\idea_rt.jar=57132:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.3.4\bin" -Dfile.encoding=UTF-8 -classpath "D:\old laptop\Documents\MY CLASSES\fall 2018\Data Structures\Assignments\1\out\production\1" QuadraticExpressionTest
+f1(x)  = 0
+f1(2) = 0.0
+f1(-2) = 0.0
+The smaller root of f1 :-1.7976931348623157E308
+f1 = 0 has  3 roots.
+
+f2(x)  = 1.0
+f2(2) = 1.0
+f2(-2) = 1.0
+java.lang.Exception: No solution
+f2 = 0 has  0 roots.
+
+Now, f2(x)  = 0.5x + 1.0
+f2(2) = 2.0
+f2(-2)= 0.0
+The small root of f2 :-Infinity
+f2 = 0 has  2 roots.
+
+f3(x)  = 1.0x^2 + 2.0x + 1.0
+f3(2) = 16.0
+f3(-2)= 4.0
+The smaller root of f3 :-1.0
+The larger root of f3 :-1.0
+f3 = 0 has  1 roots.
+
+Now, f3(x)  = 1.0x^2 + 3.0x + 1.0
+f3(2) = 11.0
+f3(-2)= -1.0
+The smaller root of f3 :-2.618033988749895
+The larger root of f3 :-0.3819660112501051
+f3 = 0 has  2 roots.
+
+After f2. add( QuadraticExpression.scale(2, f3))
+	 f2(x)  = 2.0x^2 + 0.5x + 1.0
+	 f3(x)  = 1.0x^2 + 3.0x + 1.0
+
+f4(x)  = 1.0x^2 + 3.0x + 1.0
+f3.equals(f4):  true
+f3==f4:  false
+
+Now, f4(x)  = 1.0x^2 + 1.0
+java.lang.Exception: No solution
+
+Process finished with exit code 0

@@ -1,0 +1,211 @@
+/**
+ * This QuadraticExpression class creates quadratic expressions with coefficients
+ * a, b, c and can check if the expression if there are roots and can return
+ * the largest and smallest roots.
+ * @author Abdulrahman Isegen
+ * @since 2018-09-18
+ *
+ */
+public class QuadraticExpression implements Cloneable {
+
+    private double a;
+    private double b;
+    private double c;
+
+
+    QuadraticExpression(){
+        /*Default Contructor that initializes all
+         * variables to 0
+         */
+        a = 0;
+        b = 0;
+        c = 0;
+    }
+
+    QuadraticExpression(double a, double b, double c){
+        /*Constructor that initializes the coefficients
+         * with those given in the parameters
+         */
+        this.a = a;
+        this.b = b;
+        this.c = c;
+
+    }
+
+    public String toString() {
+        /*returns quadratic expression
+         *  as string depending on coefficients
+         */
+        String eqn = "";
+        if(this.a == 0.0 && this.b == 0.0 && this.c == 0.0) {
+            eqn = "0";
+        }else if(this.a == 0 && this.b == 0) {
+            eqn = this.c + "";
+        }
+        else if(this.a == 0) {
+            eqn = this.b + "x + " + this.c;
+        }
+        else if(this.b == 0.0) {
+            eqn = this.a + "x^2 + " + this.c;
+        }
+        else if(this.c == 0.0) {
+            eqn = this.a + "x^2 + " + this.b + "x";
+        }
+        else if(this.a == 0  && this.c == 0.0) {
+            eqn = this.b + "x ";
+        }else if(this.b == 0 && this.c == 0){
+            eqn = this.a + "x^2 ";
+        }else {
+            eqn = this.a + "x^2 + " + this.b + "x + " + this.c;
+        }
+        return eqn;
+    }
+
+    public double evaluate(double x) {
+        /*evaluates according
+         *  to x value in the parameters
+         */
+        return (this.a * x * x) + (this.b * x) + this.c;
+    }
+
+    public void setA(double newA) {
+        /*
+         * sets new value of A
+         */
+        this.a = newA;
+    }
+
+    public void setB(double newB) {
+        /*
+         * sets new value of B
+         */
+        this.b = newB;
+    }
+    public void setC(double newC) {
+        /*
+         * sets new value of C
+         */
+        this.c = newC;
+    }
+
+    public static QuadraticExpression sum( QuadraticExpression q1, QuadraticExpression q2) {
+        /*
+         *  takes two expression and creates a
+         *  new one with added coeffecients
+         */
+        QuadraticExpression q = new QuadraticExpression();
+        q.a = q1.a + q2.a;
+        q.b = q1.b + q2.b;
+        q.c = q1.c + q2.b;
+        return q;
+
+    }
+
+    public static QuadraticExpression scale(double r, QuadraticExpression q) {
+        /*
+         * takes one expression and creates a new
+         * expression that is scaled by r
+         */
+        QuadraticExpression q1 = new QuadraticExpression();
+        q1.a = r * q.a;
+        q1.a = r * q.b;
+        q1.a = r * q.c;
+        return q1;
+
+    }
+
+    public int numberOfRoots() {
+        /*
+         * returns the number of roots
+         * the expression has depending on
+         * the coefficients of the expression
+         */
+        int roots;
+
+        if(this.a == 0 && this.b == 0 && this.c ==0) {
+            roots = 3;
+        }
+        else if( ((this.b * this.b) - (4 * this.a * this.c)) > 0 ) {
+            roots = 2;
+        }else if( ((this.b * this.b) - (4 * this.a * this.c)) < 0 ) {
+            roots = 0;
+        }
+        else if ((this.a == 0 && this.b == 0)) {
+            roots = 0;
+        }
+        else {
+            roots = 1;
+        }
+
+        return roots;
+    }
+
+    public void add( QuadraticExpression q) {
+        /*
+         *
+         */
+        this.a = this.a + q.a;
+        this.b = this.b + q.b;
+        this.c = this.c + q.c;
+    }
+
+    public double smallerRoot() throws Exception{
+        int roots = numberOfRoots();
+        double smallest = 0;
+        if(roots == 0) {
+            throw new Exception("No solution");
+        }else if( roots == 1) {
+            smallest = ((-this.b) / (2 * this.a));
+        }else if( roots == 2) {
+            smallest = (-this.b - Math.sqrt(((this.b *this.b)) - (4*this.a*this.c)))/(2*this.a);
+        }else {
+            smallest = -Double.MAX_VALUE;
+        }
+
+        return smallest;
+
+    }
+
+    public double largerRoot() throws Exception{
+        int roots = numberOfRoots();
+        double largest = 0;
+        if(roots == 0) {
+            throw new Exception("No solution");
+        }else if( roots == 1) {
+            largest = ((-this.b) / (2 * this.a));
+        }else if( roots == 2) {
+            largest = (-this.b + Math.sqrt(((this.b *this.b)) - (4*this.a*this.c)))/(2*this.a);
+        }else {
+            largest = Double.MAX_VALUE;
+        }
+
+        return largest;
+
+    }
+
+    public boolean equals(Object obj) {
+
+        if( obj instanceof QuadraticExpression) {
+            QuadraticExpression check = (QuadraticExpression) obj;
+            return (check.a == this.a) && (check.b == this.b) && (check.c == this.c);
+
+        }
+        else {
+            return false;
+        }
+    }
+
+    protected QuadraticExpression clone() throws CloneNotSupportedException{
+        QuadraticExpression copy;
+        try {
+            copy  = (QuadraticExpression) super.clone();
+        }
+        catch(CloneNotSupportedException e) {
+            throw new RuntimeException("This class does not implement Cloneable");
+        }
+        return copy;
+    }
+
+
+
+}
